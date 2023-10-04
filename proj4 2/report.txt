@@ -1,0 +1,52 @@
+﻿Kelly Tran
+UID: 405808641
+Project 4 CS 32
+
+
+Design of the Code:
+
+
+The insert function ensures that words are inserted into the appropriate bucket based on their sorted letters. This allows for efficient lookup and retrieval of anagrams during the lookup operation. It first checks that the word is not empty and then creates a copy of the word to remove non letter characters. From there, I calculated the hash value and used modulo to determine the bucket index and the pair is used in this code to store the association between the sorted letters and the original word within each bucket of the hash table implementation.
+
+
+The lookup function performs a constant-time lookup by using a hash table with buckets. It hashes the sorted letters string to determine the bucket index and then checks the entries in that bucket for a matching anagram. I used a method similar to the insert function, to make the entered characters valid to generate anagrams and create the hashtable. For the actual lookup part, I made sure to find the bucket that corresponds to the hash value calculated earlier by checking each word in the bucket to see if its sorted letters match the sorted letters of the word I inputted earlier. When an anagram is found, callback is used to decouple the lookup algorithm from the actions performed with the found anagrams.
+
+
+Pseudocode:
+
+
+insert(word):
+    if word is not empty:
+        create a temporary copy of word
+        remove non-letter characters from word
+        remove non-letter characters from the temporary copy
+        sort the temporary copy in ascending order
+        
+        calculate the hash value of the temporary copy using a hash function
+        determine the bucket index by taking the hash value modulo MAX_BUCKETS
+        
+        add a new pair consisting of the temporary copy and word to the bucket at the bucket index
+
+
+lookup(letters, callback):
+    if callback is null:
+        return
+    
+    remove non-letter characters from letters
+    if letters is empty:
+        return
+    
+    sort letters in ascending order
+    
+    calculate the hash value of letters using a hash function
+    determine the bucket index by taking the hash value modulo MAX_BUCKETS
+    
+    for each entry in the bucket at the bucket index:
+        if the first element of the entry is equal to letters:
+            invoke the callback function with the second element of the entry as an argument
+
+
+Bugs, Inefficiencies, Problems:
+
+
+I had a few problems with implementing the hashtable and changing it from a vector. The algorithm kept taking a long time and it took me a while to understand the lectures and optimize using the hashmap. I also didn’t understand why my code was failing until I understood that I had to use the callback function by researching more about hashmaps and other implementations.
